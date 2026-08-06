@@ -161,4 +161,5 @@ C:\Users\Lenovo\source\repos\BaglantiApp\BaglantiApp\obj\Debug\net10.0\BaglantiA
 C:\Users\Lenovo\source\repos\BaglantiApp\BaglantiApp\obj\Debug\net10.0\ref\BaglantiApp.dll
 C:\Users\Lenovo\source\repos\BaglantiApp\BaglantiApp\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
 C:\Users\Lenovo\source\repos\BaglantiApp\BaglantiApp\bin\Debug\net10.0\BaglantiApp.staticwebassets.runtime.json
-C:\Users\Lenovo\source\repos\BaglantiApp\BaglantiApp\obj\Debug\net10.0\compressed\q2rzdk4sey-{0}-ij49z240kx-ij49z240kx.gz
+C:\Users\Lenovo\source\repos\BaglantiApp\BaglantiApp\obj\Debug\net10.0\BaglantiApp.sourcelink.json
+C:\Users\Lenovo\source\repos\BaglantiApp\BaglantiApp\obj\Debug\net10.0\compressed\q2rzdk4sey-{0}-0v6kiw6stl-0v6kiw6stl.gz
