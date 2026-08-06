@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 var builder = WebApplication.CreateBuilder(args);
-
 var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
 builder.WebHost.UseUrls($"http://*:{port}");
 
@@ -16,18 +15,18 @@ string npgsqlConnStr = connStr ?? "";
 if (!string.IsNullOrEmpty(connStr) && connStr.StartsWith("postgres"))
 {
     var uri = new Uri(connStr);
-    var userInfo = uri.UserInfo.Split(':');
+    var userInfo = uri.UserInfo.Split(":");
     var user = userInfo[0];
     var pass = userInfo.Length > 1 ? userInfo[1] : "";
     var host = uri.Host;
     var portNum = uri.Port > 0 ? uri.Port : 5432;
-    var db = uri.AbsolutePath.TrimStart('/');
+    var db = uri.AbsolutePath.TrimStart("/");
     npgsqlConnStr = $"Host={host};Port={portNum};Database={db};Username={user};Password={pass};Ssl Mode=Require;Trust Server Certificate=true";
 }
 
 if (!string.IsNullOrEmpty(npgsqlConnStr))
 {
-    builder.Services.AddDbContext<AppDbContext>(options =>
+    builder.Services.AddDbContext(options =>
         options.UseNpgsql(npgsqlConnStr));
 }
 
@@ -35,13 +34,12 @@ var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-    var dbContext = scope.ServiceProvider.GetService<AppDbContext>();
+    var dbContext = scope.ServiceProvider.GetService();
     dbContext?.Database.EnsureCreated();
 }
 
 app.UseDefaultFiles();
 app.UseStaticFiles();
-
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
@@ -55,11 +53,10 @@ app.Run();
 
 public class AppDbContext : DbContext
 {
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-
-    public DbSet<Kullanici> Kullanicilar => Set<Kullanici>();
-    public DbSet<Girisim> Girisimler => Set<Girisim>();
-    public DbSet<Teklif> Teklifler => Set<Teklif>();
+    public AppDbContext(DbContextOptions options) : base(options) { }
+    public DbSet Kullanicilar => Set();
+    public DbSet Girisimler => Set();
+    public DbSet Teklifler => Set();
 }
 
 public class Kullanici
