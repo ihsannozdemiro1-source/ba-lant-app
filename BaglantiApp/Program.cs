@@ -42,7 +42,7 @@ using (var scope = app.Services.CreateScope())
     dbContext?.Database.EnsureCreated();
 }
 
-// Frontend (wwwroot/index.html) ve Statik Dosya Desteði
+// Frontend ve Statik Dosya Desteði
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
