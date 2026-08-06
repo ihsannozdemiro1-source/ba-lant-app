@@ -1,0 +1,48 @@
+[
+  {
+    "ContainingType": "BaglantiApp.Controllers.StartupsController",
+    "Method": "GetStartups",
+    "RelativePath": "api/Startups",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[BaglantiApp.Models.Startup, BaglantiApp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "BaglantiApp.Controllers.StartupsController",
+    "Method": "PostStartup",
+    "RelativePath": "api/Startups",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "startup",
+        "Type": "BaglantiApp.Models.Startup",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "BaglantiApp.Models.Startup",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  }
+]

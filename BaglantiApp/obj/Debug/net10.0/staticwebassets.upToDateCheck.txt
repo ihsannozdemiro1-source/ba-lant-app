@@ -1,0 +1,2 @@
+wwwroot\index.html
+C:\Users\Lenovo\source\repos\BaglantiApp\BaglantiApp\wwwroot\index.html

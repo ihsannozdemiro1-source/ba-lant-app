@@ -1,0 +1,6 @@
+@BaglantiApp_HostAddress = http://localhost:5037
+
+GET {{BaglantiApp_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

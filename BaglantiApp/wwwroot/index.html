@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bağlantı - Tam Kapsamlı Girişim & Yatırım Ekosistemi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 50%, #10B981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-indigo-500 selection:text-white pb-16">
+
+    <!-- Navbar -->
+    <header class="bg-white/90 backdrop-blur-md border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+
+            <!-- Logo -->
+            <div class="flex items-center space-x-6">
+                <a href="#" onclick="switchTab('startups')" class="flex items-center space-x-2.5 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-emerald-400 p-0.5 shadow-md group-hover:scale-105 transition transform">
+                        <div class="w-full h-full bg-slate-900 rounded-[10px] flex items-center justify-center">
+                            <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                            </svg>
+                        </div>
+                    </div>
+                    <span class="text-2xl font-black tracking-tight gradient-text">Bağlantı</span>
+                </a>
+
+                <!-- Menü Sekmeleri -->
+                <nav class="hidden xl:flex space-x-1">
+                    <button id="tabBtn-startups" onclick="switchTab('startups')" class="px-3 py-2 rounded-xl text-xs font-bold text-indigo-600 bg-indigo-50/80 transition">Girişimler (20)</button>
+                    <button id="tabBtn-syndicates" onclick="switchTab('syndicates')" class="px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition flex items-center gap-1">
+                        <span>🔥 Canlı Turlar</span>
+                        <span class="bg-rose-100 text-rose-700 text-[10px] font-black px-1.5 py-0.5 rounded-full">Süre Sınırlı</span>
+                    </button>
+                    <button id="tabBtn-acquisitions" onclick="switchTab('acquisitions')" class="px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition flex items-center gap-1">
+                        <span>🛒 Proje Pazarı</span>
+                        <span class="bg-emerald-100 text-emerald-700 text-[10px] font-black px-1.5 py-0.5 rounded-full">Acquire</span>
+                    </button>
+                    <button id="tabBtn-investors" onclick="switchTab('investors')" class="px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition">💼 Yatırımcılar & Portföyler</button>
+                    <button id="tabBtn-studentPerks" onclick="switchTab('studentPerks')" class="px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition flex items-center gap-1">
+                        <span>🎓 Öğrenci Pasaportu</span>
+                        <span class="bg-indigo-100 text-indigo-700 text-[10px] font-black px-1.5 py-0.5 rounded-full">8 Ayrıcalık</span>
+                    </button>
+                    <button id="tabBtn-aiTools" onclick="switchTab('aiTools')" class="px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition">🤖 AI Pitch Analiz</button>
+                </nav>
+            </div>
+
+            <div class="flex items-center space-x-3">
+                <button onclick="toggleAddModal(true)" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-md transition">
+                    + İlan / Proje Yayınla
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-8">
+
+        <!-- 1. GİRİŞİMLER SEKMESİ -->
+        <div id="view-startups" class="space-y-6">
+            <section class="relative overflow-hidden bg-slate-900 text-white p-8 rounded-3xl shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border border-slate-800">
+                <div class="relative z-10 max-w-xl">
+                    <div class="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-bold px-3 py-1 rounded-full mb-3">
+                        <span>🚀 Ekosistem Portalı</span>
+                    </div>
+                    <h1 class="text-3xl sm:text-4xl font-black tracking-tight mb-2">Geleceğin Şirketlerini Keşfet & Destekle</h1>
+                    <p class="text-slate-400 text-sm leading-relaxed">Kurucu geçmişleri doğrulanmış aktif girişimler, mikro-proje pazarı, canlı yatırım turları ve öğrenci ayrıcalıkları.</p>
+                </div>
+
+                <div class="relative z-10 grid grid-cols-3 gap-3 bg-slate-800/80 p-4 rounded-2xl border border-slate-700/50 text-center w-full md:w-auto">
+                    <div class="px-3">
+                        <div class="text-2xl sm:text-3xl font-black text-emerald-400" id="statStartupCount">0</div>
+                        <div class="text-[11px] text-slate-400 font-medium">Girişim</div>
+                    </div>
+                    <div class="px-3 border-l border-slate-700">
+                        <div class="text-2xl sm:text-3xl font-black text-indigo-400" id="statInvestorCount">0</div>
+                        <div class="text-[11px] text-slate-400 font-medium">Yatırımcı</div>
+                    </div>
+                    <div class="px-3 border-l border-slate-700">
+                        <div class="text-2xl sm:text-3xl font-black text-purple-400" id="statTotalFund">₺0</div>
+                        <div class="text-[11px] text-slate-400 font-medium">Toplanan Fon</div>
+                    </div>
+                </div>
+            </section>
+            <!-- Filtreler -->
+            <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+                <input type="text" id="searchInput" onkeyup="filterStartups()" placeholder="Girişim adı, kurucu veya sektör..." class="sm:col-span-2 p-2.5 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+                <select id="sectorFilter" onchange="filterStartups()" class="p-2.5 border border-slate-200 rounded-xl text-sm bg-white outline-none">
+                    <option value="">Tüm Sektörler</option>
+                    <option value="Yapay Zekâ">Yapay Zekâ</option>
+                    <option value="Fintek">Fintek</option>
+                    <option value="SaaS">SaaS</option>
+                    <option value="Lojistik">Lojistik</option>
+                    <option value="Eğitim">Eğitim</option>
+                    <option value="Sağlık">Sağlık</option>
+                    <option value="Oyun">Oyun</option>
+                    <option value="Siber Güvenlik">Siber Güvenlik</option>
+                    <option value="Tarım Teknolojileri">Tarım</option>
+                    <option value="Derin Teknoloji / AR-GE">Derin Teknoloji</option>
+                </select>
+                <select id="stageFilter" onchange="filterStartups()" class="p-2.5 border border-slate-200 rounded-xl text-sm bg-white outline-none">
+                    <option value="">Tüm Aşamalar</option>
+                    <option value="Fikir">Fikir</option>
+                    <option value="MVP">MVP</option>
+                    <option value="Erken Aşama">Erken Aşama</option>
+                    <option value="Akademik Spin-off">Akademik Spin-off</option>
+                </select>
+                <button onclick="resetFilters()" class="text-sm font-semibold text-slate-600 hover:text-indigo-600 border border-slate-200 rounded-xl p-2.5 bg-slate-50 transition">Sıfırla</button>
+            </section>
+
+            <section id="startupGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></section>
+        </div>
+
+        <!-- 2. CANLI SENDİKA TURLARI -->
+        <div id="view-syndicates" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-rose-900 via-indigo-900 to-slate-900 text-white p-8 rounded-3xl shadow-lg border border-rose-800/50 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                <div>
+                    <span class="bg-rose-400 text-slate-900 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider mb-2 inline-block">Süre Sınırlı Yatırım Turları</span>
+                    <h2 class="text-3xl font-black mb-2">Lider Yatırımcı Sendikaları & Mikro Katılım</h2>
+                    <p class="text-rose-200 text-sm max-w-xl">Tecrübeli melek yatırımcıların liderlik ettiği turlara $500 - $1.000 gibi mikro tutarlarla siz de ortak olun.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="syndicatesGrid"></div>
+        </div>
+
+        <!-- 3. PROJE SATIŞ PAZARI (ACQUIRE.COM) -->
+        <div id="view-acquisitions" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-emerald-900 via-teal-900 to-slate-900 text-white p-8 rounded-3xl shadow-lg border border-emerald-800/50 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                <div>
+                    <span class="bg-emerald-400 text-slate-900 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider mb-2 inline-block">Micro-Acquisition Pazarı</span>
+                    <h2 class="text-3xl font-black mb-2">Devredilebilir Projeler & Mikro SaaS Satışı</h2>
+                    <p class="text-emerald-200 text-sm max-w-xl">Gelir getiren yan projeleri ve devredilebilir SaaS ürünlerini satın alın veya projenizi devredin.</p>
+                </div>
+                <button onclick="alert('Proje satış ilanı ekleme formu açılıyor.')" class="bg-emerald-400 hover:bg-emerald-300 text-slate-900 font-extrabold text-sm px-5 py-3 rounded-2xl shadow-md transition">
+                    🛒 Satılık Proje İlanı Ver
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="acquisitionsGrid"></div>
+        </div>
+
+        <!-- 4. YATIRIMCILAR & PORTFÖY FİNANSALLARI -->
+        <div id="view-investors" class="hidden space-y-6">
+            <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <h2 class="text-2xl font-black text-slate-900 mb-1">Yatırımcı Portföyleri & Çıkış (Exit) Performansları</h2>
+                    <p class="text-slate-500 text-xs">Yatırımcıların aktif desteklediği şirketler, yatırdıkları toplam sermaye ve çıkış getirileri.</p>
+                </div>
+                <button onclick="toggleReviewModal(true)" class="bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs px-4 py-2.5 rounded-xl">
+                    ⭐ Yatırımcıyı Değerlendir
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="investorsGrid"></div>
+        </div>
+
+        <!-- 5. ÖĞRENCİ AYRICALIKLARI (GENİŞLETİLMİŞ - 8 AYRICALIK) -->
+        <div id="view-studentPerks" class="hidden space-y-8">
+            <div class="bg-gradient-to-r from-indigo-900 via-purple-900 to-slate-900 text-white p-8 rounded-3xl shadow-lg border border-indigo-700/50 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                <div>
+                    <span class="bg-emerald-400 text-slate-900 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider mb-2 inline-block">.edu.tr Pasaportu</span>
+                    <h2 class="text-3xl font-black mb-2">Öğrenci Girişimci Fast-Track Paneli</h2>
+                    <p class="text-indigo-200 text-sm max-w-xl">Üniversite öğrencisi olarak fikrinizi ticarileştirirken akademik ve finansal engelleri ortadan kaldıran 8 ayrıcalık.</p>
+                </div>
+                <button onclick="alert('.edu.tr mail doğrulaması başlatıldı.')" class="bg-emerald-400 hover:bg-emerald-300 text-slate-900 font-extrabold text-sm px-5 py-3 rounded-2xl shadow-md transition">
+                    🎓 Öğrenci Kimliğini Doğrula
+                </button>
+            </div>
+
+            <!-- 8 Ayrıcalık Kartı Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <!-- 1 -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+                    <div class="space-y-2">
+                        <div class="w-10 h-10 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-black text-lg">📄</div>
+                        <h3 class="text-base font-extrabold text-slate-900">Staj Yerine Kendi Girişimin</h3>
+                        <p class="text-slate-600 text-xs leading-relaxed">Kendi şirketinde çalışan öğrencilerin zorunlu okul stajından muaf tutulması için resmi onay raporu.</p>
+                    </div>
+                    <button onclick="alert('Muafiyet raporu indirildi.')" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 rounded-xl transition">Rapor Oluştur ↗</button>
+                </div>
+
+                <!-- 2 -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+                    <div class="space-y-2">
+                        <div class="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-black text-lg">💰</div>
+                        <h3 class="text-base font-extrabold text-slate-900">Genç Girişimci Vergi Desteği</h3>
+                        <p class="text-slate-600 text-xs leading-relaxed">29 yaş altı kuruculara özel 3 yıl gelir vergisi ve 1 yıl Bağ-Kur muafiyeti rehberi.</p>
+                    </div>
+                    <button onclick="alert('Kılavuz indirildi.')" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 rounded-xl transition">Rehberi İndir ↗</button>
+                </div>
+
+                <!-- 3 -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+                    <div class="space-y-2">
+                        <div class="w-10 h-10 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center font-black text-lg">🚀</div>
+                        <h3 class="text-base font-extrabold text-slate-900">Öğrenci Prototip Fonu</h3>
+                        <p class="text-slate-600 text-xs leading-relaxed">MVP çıkaran öğrenci ekiplerine $1.000 değerinde Google Cloud, AWS ve OpenAI API hibe paketi.</p>
+                    </div>
+                    <button onclick="alert('Hibe talebi alındı.')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs py-2.5 rounded-xl transition">Mikro-Hibe İste</button>
+                </div>
+
+                <!-- 4 -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+                    <div class="space-y-2">
+                        <div class="w-10 h-10 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center font-black text-lg">🏢</div>
+                        <h3 class="text-base font-extrabold text-slate-900">Teknokent Ücretsiz Masa</h3>
+                        <p class="text-slate-600 text-xs leading-relaxed">Partner üniversitelerin kuluçka merkezlerinde ücretsiz paylaşımlı masa ve internet kullanımı.</p>
+                    </div>
+                    <button onclick="alert('Kuluçka masa tahsis formu iletildi.')" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 rounded-xl transition">Masa Başvurusu Yap ↗</button>
+                </div>
+
+                <!-- 5 -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+                    <div class="space-y-2">
+                        <div class="w-10 h-10 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center font-black text-lg">🎓</div>
+                        <h3 class="text-base font-extrabold text-slate-900">Akademik İzin Dilekçesi</h3>
+                        <p class="text-slate-600 text-xs leading-relaxed">Yatırım sunumları ve yarışma günleri için sınav/ders devamsızlık muafiyet yazısı.</p>
+                    </div>
+                    <button onclick="alert('İzin dilekçesi indirildi.')" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 rounded-xl transition">Dilekçe İndir ↗</button>
+                </div>
+
+                <!-- 6 -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+                    <div class="space-y-2">
+                        <div class="w-10 h-10 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center font-black text-lg">📜</div>
+                        <h3 class="text-base font-extrabold text-slate-900">Patent & TPE Harç Desteği</h3>
+                        <p class="text-slate-600 text-xs leading-relaxed">Üniversite laboratuvarlarından çıkan patent başvurularında TPE dosyalama desteği.</p>
+                    </div>
+                    <button onclick="alert('Patent inceleme başvuru desteği iletildi.')" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 rounded-xl transition">Patent Desteği Al ↗</button>
+                </div>
+
+                <!-- 7 -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+                    <div class="space-y-2">
+                        <div class="w-10 h-10 rounded-2xl bg-sky-50 text-sky-600 flex items-center justify-center font-black text-lg">🤝</div>
+                        <h3 class="text-base font-extrabold text-slate-900">Kulüp Sponsorluk Fonu</h3>
+                        <p class="text-slate-600 text-xs leading-relaxed">Girişimcilik kulüplerinin düzenlediği hackathon ve yarışmalar için mikro sponsorluk bütçesi.</p>
+                    </div>
+                    <button onclick="alert('Sponsorluk talebi alındı.')" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 rounded-xl transition">Sponsorluk İste ↗</button>
+                </div>
+
+                <!-- 8 -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+                    <div class="space-y-2">
+                        <div class="w-10 h-10 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center font-black text-lg">👨‍🏫</div>
+                        <h3 class="text-base font-extrabold text-slate-900">Mezun (Alumni) Mentor Ağı</h3>
+                        <p class="text-slate-600 text-xs leading-relaxed">Kendi okulundan mezun olmuş exit yapmış tecrübeli kurucularla 1'e 1 mentorluk randevusu.</p>
+                    </div>
+                    <button onclick="alert('Eşleşme ekranı açılıyor.')" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs py-2.5 rounded-xl transition">Mentor Bul ↗</button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 6. AI PITCH ANALİZ -->
+        <div id="view-aiTools" class="hidden space-y-6">
+            <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+                <div>
+                    <span class="bg-purple-100 text-purple-700 text-xs font-black px-3 py-1 rounded-full uppercase">Otomatik Kontrolör</span>
+                    <h2 class="text-2xl font-black text-slate-900 mt-2">AI Pitch Deck & Sunum Skorlayıcı</h2>
+                    <p class="text-slate-500 text-xs">Sunum metninizi veya özetinizi yapıştırın; AI pazar büyüklüğü ve finansallar açısından puanlasın.</p>
+                </div>
+
+                <div class="space-y-3">
+                    <textarea id="aiDeckText" rows="5" placeholder="Girişiminizin problemini, pazar büyüklüğünü (TAM), gelir modelinizi ve kurucu ekibinizi özetleyin..." class="w-full p-3 border rounded-2xl text-sm outline-none focus:ring-2 focus:ring-purple-500"></textarea>
+                    <button onclick="analyzeDeckWithAi()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs px-6 py-3 rounded-xl shadow-md transition">
+                        🤖 Sunumu AI İle Skorla
+                    </button>
+                </div>
+
+                <div id="aiResultBox" class="hidden bg-slate-900 text-white p-6 rounded-2xl space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="font-extrabold text-sm text-emerald-400">AI Analiz Skoru: <span id="aiScore">88 / 100</span></span>
+                        <span class="text-xs text-slate-400">Geri Bildirim Özeti</span>
+                    </div>
+                    <ul id="aiFeedbackList" class="text-xs space-y-1 text-slate-300"></ul>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- YATIRIMCI PORTFÖY DETAY MODALI -->
+    <div id="investorDetailModal" class="fixed inset-0 bg-slate-900/60 hidden z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <button onclick="toggleInvestorModal(false)" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-2xl font-bold">&times;</button>
+            <div id="investorModalContent"></div>
+        </div>
+    </div>
+
+    <!-- YATIRIMCI DEĞERLENDİRME MODALI -->
+    <div id="reviewModal" class="fixed inset-0 bg-slate-900/60 hidden z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl relative">
+            <button onclick="toggleReviewModal(false)" class="absolute top-4 right-4 text-slate-400 text-2xl font-bold">&times;</button>
+            <h3 class="text-xl font-extrabold mb-1 text-slate-900">Yatırımcıya Anonim Puan Ver</h3>
+            <p class="text-slate-500 text-xs mb-4">Görüştüğünüz yatırımcıyı puanlayın.</p>
+
+            <form onsubmit="handleReviewSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Yatırımcı / VC Fonu</label>
+                    <select id="revInvestor" class="w-full p-2.5 border rounded-xl text-sm bg-white outline-none">
+                        <option value="Selin Yılmaz">Selin Yılmaz</option>
+                        <option value="VentureTurk Capital">VentureTurk Capital</option>
+                        <option value="Caner Öztürk">Caner Öztürk</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Geri Dönüş Hızı (1 - 5 Yıldız)</label>
+                    <input type="number" id="revSpeed" min="1" max="5" value="5" class="w-full p-2.5 border rounded-xl text-sm outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Görüşme Değerlendirmesi</label>
+                    <textarea id="revComment" rows="3" required placeholder="Geri bildirim hızı çok iyiydi..." class="w-full p-2.5 border rounded-xl text-sm outline-none"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-slate-900 text-white font-bold py-3 rounded-xl text-sm">Puanı Gönder</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- GİRİŞİM DETAY MODALI (Kurucu Geçmişli) -->
+    <div id="detailModal" class="fixed inset-0 bg-slate-900/60 hidden z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <button onclick="toggleDetailModal(false)" class="absolute top-4 right-4 text-slate-400 text-2xl font-bold">&times;</button>
+            <div id="detailModalContent"></div>
+        </div>
+    </div>
+
+    <!-- GİRİŞİM EKLEME MODALI -->
+    <div id="addModal" class="fixed inset-0 bg-slate-900/60 hidden z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <button onclick="toggleAddModal(false)" class="absolute top-4 right-4 text-slate-400 text-2xl font-bold">&times;</button>
+            <h2 class="text-xl font-extrabold mb-4 text-slate-900">Bağlantı'ya Yeni İlan Ekle</h2>
+
+            <form onsubmit="handleAddStartup(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Girişim Adı</label>
+                    <input type="text" id="addTitle" required class="w-full p-2.5 border rounded-xl text-sm outline-none">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Sektör</label>
+                        <select id="addSector" class="w-full p-2.5 border rounded-xl text-sm bg-white outline-none">
+                            <option value="Yapay Zekâ">Yapay Zekâ</option>
+                            <option value="Fintek">Fintek</option>
+                            <option value="SaaS">SaaS</option>
+                            <option value="Lojistik">Lojistik</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Aşama</label>
+                        <select id="addStage" class="w-full p-2.5 border rounded-xl text-sm bg-white outline-none">
+                            <option value="Fikir">Fikir</option>
+                            <option value="MVP">MVP</option>
+                            <option value="Erken Aşama">Erken Aşama</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Hedef Yatırım ($)</label>
+                        <input type="number" id="addGoal" required placeholder="50000" class="w-full p-2.5 border rounded-xl text-sm outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Kurucu İsim</label>
+                        <input type="text" id="addFounder" required placeholder="Caner Yılmaz" class="w-full p-2.5 border rounded-xl text-sm outline-none">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Eski Girişim / Geçmiş Deneyim (Varsa)</label>
+                    <input type="text" id="addPastStartups" placeholder="Örn: X-Tech SaaS (Satıldı - $200K Yatırım Almıştı)" class="w-full p-2.5 border rounded-xl text-sm outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Açıklama</label>
+                    <textarea id="addDesc" rows="3" required placeholder="Girişimin çözdüğü problem..." class="w-full p-2.5 border rounded-xl text-sm outline-none"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl text-sm shadow-md">Yayınla</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="fixed bottom-0 inset-x-0 bg-slate-900 text-slate-400 py-2 px-4 text-xs flex justify-between items-center border-t border-slate-800 z-40">
+        <span>💡 <b>Test Modu:</b> Veriler yerel hafızada saklanmaktadır.</span>
+        <button onclick="resetToDefaults()" class="text-rose-400 font-bold underline">Varsayılan Verilere Sıfırla</button>
+    </div>
+
+    <script>
+    const mockSyndicates = [
+      { id: 1, title: "AiFlow Analytics - Tohum Öncesi Tur", leadInvestor: "Selin Yılmaz (Melek Yatırımcı)", target: 100000, raised: 74000, minTicket: 500, daysLeft: 6, description: "E-ticaret yapay zekası için lider yatırımcı arkasında mikro biletlerle ortak yatırım turu." },
+      { id: 2, title: "KargoBul - Büyüme Turu", leadInvestor: "VentureTurk Capital", target: 200000, raised: 165000, minTicket: 1000, daysLeft: 12, description: "Lojistik pazaryeri ölçeklenmesi için ortak sendika fonlama turları." }
+    ];
+
+    const mockAcquisitions = [
+      { id: 1, title: "PDFConvert AI (Mikro SaaS)", mrr: 1400, askingPrice: 28000, tech: "React, Python, OpenAI", reason: "Kurucu ekibin başka projeye odaklanması." },
+      { id: 2, title: "FitTrack iOS / Android Mobil Uygulama", mrr: 850, askingPrice: 15000, tech: "Flutter, Firebase", reason: "Organik 12.000 aktif kullanıcı dahil devir." }
+    ];
+
+    const mockInvestors = [
+      {
+        id: 1,
+        name: "Selin Yılmaz",
+        type: "Melek Yatırımcı",
+        focus: "Yapay Zekâ, SaaS",
+        rating: 4.9,
+        reviewsCount: 12,
+        totalInvested: 420000,
+        totalReturned: 1850000,
+        activeCount: 3,
+        exitCount: 2,
+        activePortfolio: [
+          { name: "AiFlow Analytics", invested: 50000, stage: "MVP" },
+          { name: "CyberShield AI", invested: 75000, stage: "Erken Aşama" },
+          { name: "HRBotic", invested: 45000, stage: "Erken Aşama" }
+        ],
+        exits: [
+          { name: "ShopAI Software", invested: 50000, returned: 950000, year: "2024", note: "ABD Fintek Devine Satıldı" },
+          { name: "AdTech Pro", invested: 40000, returned: 900000, year: "2025", note: "Stratejik Satın Alma" }
+        ]
+      },
+      {
+        id: 2,
+        name: "VentureTurk Capital",
+        type: "VC Fonu",
+        focus: "Fintek, Lojistik, SaaS",
+        rating: 4.7,
+        reviewsCount: 18,
+        totalInvested: 2400000,
+        totalReturned: 6800000,
+        activeCount: 5,
+        exitCount: 3,
+        activePortfolio: [
+          { name: "KargoBul", invested: 150000, stage: "Erken Aşama" },
+          { name: "YerelPazar", invested: 200000, stage: "Erken Aşama" },
+          { name: "CloudFleet", invested: 100000, stage: "Fikir" }
+        ],
+        exits: [
+          { name: "PayFast TR", invested: 300000, returned: 3200000, year: "2023", note: "Banka Satın Alması" },
+          { name: "LogiRoute", invested: 250000, returned: 2100000, year: "2024", note: "Almanya Pazarına Satış" },
+          { name: "DataSecure", invested: 180000, returned: 1500000, year: "2025", note: "Halka Arz / IPO" }
+        ]
+      },
+      {
+        id: 3,
+        name: "Caner Öztürk",
+        type: "Melek Yatırımcı",
+        focus: "Siber Güvenlik, Oyun",
+        rating: 4.8,
+        reviewsCount: 8,
+        totalInvested: 310000,
+        totalReturned: 840000,
+        activeCount: 2,
+        exitCount: 1,
+        activePortfolio: [
+          { name: "CyberShield AI", invested: 60000, stage: "Erken Aşama" },
+          { name: "GameCraft Studio", invested: 50000, stage: "MVP" }
+        ],
+        exits: [
+          { name: "PixelWorks Games", invested: 40000, returned: 840000, year: "2024", note: "Londra Yayıncısına Satıldı" }
+        ]
+      },
+      {
+        id: 4,
+        name: "Karya Ventures",
+        type: "Erken Aşama VC",
+        focus: "Biyoteknoloji, Sağlık",
+        rating: 4.6,
+        reviewsCount: 10,
+        totalInvested: 1200000,
+        totalReturned: 2900000,
+        activeCount: 4,
+        exitCount: 1,
+        activePortfolio: [
+          { name: "NanoBio Tech", invested: 250000, stage: "Akademik Spin-off" },
+          { name: "FitMutfak", invested: 80000, stage: "MVP" }
+        ],
+        exits: [
+          { name: "MedTech Labs", invested: 200000, returned: 2900000, year: "2025", note: "Global İlaç Şirketine Lisanslandı" }
+        ]
+      },
+      {
+        id: 5,
+        name: "Eren Avcı",
+        type: "Melek Yatırımcı",
+        focus: "EdTech, Tarım",
+        rating: 4.9,
+        reviewsCount: 6,
+        totalInvested: 180000,
+        totalReturned: 410000,
+        activeCount: 2,
+        exitCount: 1,
+        activePortfolio: [
+          { name: "EduKampüs", invested: 30000, stage: "MVP" },
+          { name: "Agronome AI", invested: 40000, stage: "MVP" }
+        ],
+        exits: [
+          { name: "AkademiNet", invested: 25000, returned: 410000, year: "2023", note: "Özel Okul Grubuna Satıldı" }
+        ]
+      },
+      {
+        id: 6,
+        name: "Dora Portföy",
+        type: "Kurumsal VC",
+        focus: "Derin Teknoloji, IoT",
+        rating: 4.5,
+        reviewsCount: 15,
+        totalInvested: 3500000,
+        totalReturned: 9100000,
+        activeCount: 6,
+        exitCount: 4,
+        activePortfolio: [
+          { name: "SolarShift", invested: 120000, stage: "Fikir" },
+          { name: "NanoBio Tech", invested: 300000, stage: "Akademik Spin-off" }
+        ],
+        exits: [
+          { name: "IoT Grid", invested: 400000, returned: 4500000, year: "2024", note: "Enerji Holdinge Satıldı" },
+          { name: "SensorX", invested: 300000, returned: 2800000, year: "2025", note: "Stratejik Satış" }
+        ]
+      }
+    ];
+
+    // 20 TANE GİRİŞİM VERİSİ
+    const initialStartups = [
+      {
+        id: 1,
+        title: "AiFlow Analytics",
+        sector: "Yapay Zekâ",
+        stage: "MVP",
+        university: "Marmara Üniversitesi",
+        fundingGoal: 75000,
+        val: 500000,
+        raised: 40000,
+        founder: "Mehmet Demir",
+        founderBio: "Seri Girişimci (2. Girişimi)",
+        founderPastStartups: [{ name: "EasySell SaaS", status: "Satıldı (Exit - 2023)", raised: "$150,000 Yatırım" }],
+        description: "E-ticaret siteleri için müşteri davranışlarını anlık tahminleyen yapay zeka modülü."
+      },
+      {
+        id: 2,
+        title: "KargoBul",
+        sector: "Lojistik",
+        stage: "Erken Aşama",
+        university: "İstanbul Üniversitesi",
+        fundingGoal: 50000,
+        val: 350000,
+        raised: 28000,
+        founder: "Ahmet Yılmaz",
+        founderBio: "Lojistik & Yazılım Kurucusu",
+        founderPastStartups: [{ name: "KuryeExpress", status: "Durduruldu (2022)", raised: "$30,000 Özsermaye" }],
+        description: "Şehirlerarası yolculuk yapan sürücülerin boş bagaj alanlarını buluşturan pazaryeri."
+      },
+      {
+        id: 3,
+        title: "EduKampüs",
+        sector: "Eğitim",
+        stage: "MVP",
+        university: "İTÜ Teknokent",
+        fundingGoal: 30000,
+        val: 200000,
+        raised: 12000,
+        founder: "Ece Kaya",
+        founderBio: "İTÜ Bilgisayar Müh. Öğrencisi",
+        founderPastStartups: [],
+        description: "Üniversite öğrencilerinin ikinci el ders kitabı ve notlarını sattığı topluluk uygulaması."
+      },
+      {
+        id: 4,
+        title: "YerelPazar",
+        sector: "Fintek",
+        stage: "Erken Aşama",
+        university: "Ankara Üniversitesi",
+        fundingGoal: 100000,
+        val: 800000,
+        raised: 65000,
+        founder: "Burak Şahin",
+        founderBio: "Ex-Ödeme Sistemleri Yöneticisi",
+        founderPastStartups: [{ name: "POSMobil", status: "Birleşme Yapıldı (Merger - 2021)", raised: "$250,000" }],
+        description: "Mahalle esnafının yüksek komisyon ödemeden QR kod ile sipariş ve ödeme almasını sağlayan altyapı."
+      },
+      {
+        id: 5,
+        title: "NanoBio Tech",
+        sector: "Derin Teknoloji / AR-GE",
+        stage: "Akademik Spin-off",
+        university: "Boğaziçi Üniversitesi",
+        fundingGoal: 200000,
+        val: 1500000,
+        raised: 110000,
+        founder: "Dr. Selin Akın",
+        founderBio: "Biyomedikal Araştırmacı",
+        founderPastStartups: [{ name: "BioGen Lab", status: "TÜBİTAK 1512 Desteği Aldı", raised: "$50,000 Hibe" }],
+        description: "Kanser hücrelerini doğrudan hedefleyen patentli nanoparçacık ilaç taşıyıcı platformu."
+      },
+      {
+        id: 6,
+        title: "CyberShield AI",
+        sector: "Siber Güvenlik",
+        stage: "Erken Aşama",
+        university: "Hacettepe Üniversitesi",
+        fundingGoal: 120000,
+        val: 900000,
+        raised: 55000,
+        founder: "Oğuz Kara",
+        founderBio: "Siber Güvenlik Araştırmacısı",
+        founderPastStartups: [],
+        description: "KOBİ'lerin sunucu ve web altyapılarına yönelik otonom zafiyet tespiti yapan yapay zeka ajanı."
+      },
+      {
+        id: 7,
+        title: "GameCraft Studio",
+        sector: "Oyun",
+        stage: "MVP",
+        university: "Bahçeşehir Üniversitesi",
+        fundingGoal: 80000,
+        val: 600000,
+        raised: 30000,
+        founder: "Deniz Arslan",
+        founderBio: "Oyun Tasarımcısı",
+        founderPastStartups: [{ name: "PixelPlay", status: "Satıldı (2023)", raised: "$40,000 Melek Yatırım" }],
+        description: "Mobil platformlar için yapay zeka destekli bölüm oluşturan roguelike rol yapma oyunu."
+      },
+      {
+        id: 8,
+        title: "Agronome AI",
+        sector: "Tarım Teknolojileri",
+        stage: "MVP",
+        university: "Çukurova Üniversitesi",
+        fundingGoal: 65000,
+        val: 450000,
+        raised: 22000,
+        founder: "Gökhan Öztürk",
+        founderBio: "Ziraat Müh. & Veri Analisti",
+        founderPastStartups: [],
+        description: "Uydu görüntüleri ve toprak sensörleriyle tarlalardaki rekolteyi tahminleyen tarım yazılımı."
+      },
+      {
+        id: 9,
+        title: "HRBotic",
+        sector: "SaaS",
+        stage: "Erken Aşama",
+        university: "Yıldız Teknik Üniversitesi",
+        fundingGoal: 90000,
+        val: 700000,
+        raised: 48000,
+        founder: "Gizem Çelik",
+        founderBio: "Ex-İK Yöneticisi",
+        founderPastStartups: [],
+        description: "İnsan kaynakları için sesli ve yazılı ilk mülakatları otomatikleştiren yapay zeka asistanı."
+      },
+      {
+        id: 10,
+        title: "SolarShift",
+        sector: "SaaS",
+        stage: "Fikir",
+        university: "ODTÜ Teknokent",
+        fundingGoal: 60000,
+        val: 300000,
+        raised: 8000,
+        founder: "Kaan Arslan",
+        founderBio: "Yenilenebilir Enerji Müh.",
+        founderPastStartups: [],
+        description: "Güneş panellerinin verimini uzaktan takip edip arızaları önceden bildiren IoT platformu."
+      },
+      {
+        id: 11,
+        title: "FitMutfak",
+        sector: "Sağlık",
+        stage: "MVP",
+        university: "Ege Üniversitesi",
+        fundingGoal: 40000,
+        val: 250000,
+        raised: 22000,
+        founder: "Zeynep Balcı",
+        founderBio: "Diyetisyen & Girişimci",
+        founderPastStartups: [],
+        description: "Diyetisyen onaylı kişiye özel yemek paketlerini abonelikle teslim eden uygulama."
+      },
+      {
+        id: 12,
+        title: "CloudFleet",
+        sector: "Lojistik",
+        stage: "Fikir",
+        university: "Gazi Üniversitesi",
+        fundingGoal: 85000,
+        val: 500000,
+        raised: 15000,
+        founder: "Emre Koç",
+        founderBio: "Yazılım Geliştirici",
+        founderPastStartups: [],
+        description: "Soğuk zincir taşıma araçlarının sıcaklık verilerini şeffaf raporlayan takip sistemi."
+      },
+      {
+        id: 13,
+        title: "RobiTeach",
+        sector: "Eğitim",
+        stage: "MVP",
+        university: "Marmara Üniversitesi",
+        fundingGoal: 45000,
+        val: 300000,
+        raised: 18000,
+        founder: "Aylin Şahin",
+        founderBio: "Mekatronik Müh. Öğrencisi",
+        founderPastStartups: [],
+        description: "İlkokul öğrencilerine kodlama öğreten STEM robotik eğitim seti."
+      },
+      {
+        id: 14,
+        title: "BlockPay",
+        sector: "Fintek",
+        stage: "Erken Aşama",
+        university: "Koç Üniversitesi",
+        fundingGoal: 150000,
+        val: 1200000,
+        raised: 85000,
+        founder: "Tarik Yılmaz",
+        founderBio: "Fintek Araştırmacısı",
+        founderPastStartups: [{ name: "CryptoWallet", status: "Exit - 2022", raised: "$100,000" }],
+        description: "Sınır ötesi B2B ödemeleri blokzincir üzerinde komisyonsuz transfer eden altyapı."
+      },
+      {
+        id: 15,
+        title: "BioSense",
+        sector: "Sağlık",
+        stage: "Akademik Spin-off",
+        university: "Cerrahpaşa Tıp Fak.",
+        fundingGoal: 180000,
+        val: 1400000,
+        raised: 95000,
+        founder: "Dr. Murat Aydın",
+        founderBio: "Tıp Doktoru & BiyoMüh.",
+        founderPastStartups: [],
+        description: "Diyabet hastaları için iğnesiz glikoz ölçümü yapan biyosensör akıllı bant."
+      },
+      {
+        id: 16,
+        title: "VR-Classroom",
+        sector: "Eğitim",
+        stage: "MVP",
+        university: "Anadolu Üniversitesi",
+        fundingGoal: 50000,
+        val: 350000,
+        raised: 20000,
+        founder: "Seda Aksoy",
+        founderBio: "VR/AR Geliştirici",
+        founderPastStartups: [],
+        description: "Tıp ve mühendislik öğrencileri için sanal gerçeklik laboratuvar simülasyonu."
+      },
+      {
+        id: 17,
+        title: "EcoPack",
+        sector: "Derin Teknoloji / AR-GE",
+        stage: "MVP",
+        university: "İTÜ Teknokent",
+        fundingGoal: 70000,
+        val: 450000,
+        raised: 35000,
+        founder: "Merve Polat",
+        founderBio: "Kimya Müh. Öğrencisi",
+        founderPastStartups: [],
+        description: "Tarımsal atıklardan üretilen %100 biyobozunur doğa dostu ambalaj malzemesi."
+      },
+      {
+        id: 18,
+        title: "SmartHive",
+        sector: "Tarım Teknolojileri",
+        stage: "MVP",
+        university: "Ege Üniversitesi",
+        fundingGoal: 35000,
+        val: 220000,
+        raised: 14000,
+        founder: "Hasan Çakır",
+        founderBio: "Elektronik Müh.",
+        founderPastStartups: [],
+        description: "Arı kovanlarının bal verimini ve koloni sağlığını uzaktan takip eden akıllı kovan sensörü."
+      },
+      {
+        id: 19,
+        title: "AutoForm AI",
+        sector: "SaaS",
+        stage: "Erken Aşama",
+        university: "Bilkent Üniversitesi",
+        fundingGoal: 110000,
+        val: 850000,
+        raised: 60000,
+        founder: "Selin Erdem",
+        founderBio: "Yazılım Kurucusu",
+        founderPastStartups: [{ name: "FormEasy", status: "Satıldı", raised: "$50,000" }],
+        description: "Müşteri formlarını ve anketlerini otomatik analiz edip CRM'e aktaran AI ajanı."
+      },
+      {
+        id: 20,
+        title: "MindCare",
+        sector: "Sağlık",
+        stage: "MVP",
+        university: "Sabancı Üniversitesi",
+        fundingGoal: 40000,
+        val: 280000,
+        raised: 19000,
+        founder: "Ceren Korkmaz",
+        founderBio: "Psikolog & Mobil Geliştirici",
+        founderPastStartups: [],
+        description: "Üniversite öğrencilerine özel bilişsel davranışçı terapi tabanlı yapay zeka ruh sağlığı asistanı."
+      }
+    ];
+
+    let startups = JSON.parse(localStorage.getItem('baglanti_v12_startups')) || initialStartups;
+
+    function saveToStorage() { localStorage.setItem('baglanti_v12_startups', JSON.stringify(startups)); }
+    function resetToDefaults() { localStorage.removeItem('baglanti_v12_startups'); startups = initialStartups; renderStartups(startups); }
+
+    function renderStartups(data) {
+      const grid = document.getElementById('startupGrid');
+      document.getElementById('statStartupCount').innerText = data.length;
+      grid.innerHTML = '';
+
+      data.forEach(item => {
+        const percent = Math.min(100, Math.round((item.raised / item.fundingGoal) * 100));
+        const card = document.createElement('div');
+        card.className = "bg-white border border-slate-200 rounded-3xl p-5 shadow-sm hover:shadow-md transition flex flex-col justify-between";
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="bg-indigo-50 text-indigo-700 text-xs font-bold px-3 py-1 rounded-full">${item.sector}</span>
+              <span class="bg-slate-100 text-slate-700 text-[11px] font-bold px-2 py-0.5 rounded-md">${item.stage}</span>
+            </div>
+            <h3 class="text-xl font-extrabold text-slate-900 mb-1 cursor-pointer hover:text-indigo-600" onclick="openDetailModal(${item.id})">${item.title}</h3>
+            <p class="text-xs text-indigo-600 font-bold mb-3">👤 Kurucu: ${item.founder} <span class="text-slate-400 font-normal">(${item.founderBio || 'Girişimci'})</span></p>
+            <p class="text-slate-600 text-sm mb-4 line-clamp-2">${item.description}</p>
+          </div>
+          <div>
+            <div class="mb-4">
+              <div class="flex justify-between text-xs font-bold mb-1">
+                <span class="text-emerald-600">$${item.raised.toLocaleString()} toplandı</span>
+                <span class="text-slate-400">Hedef: $${item.fundingGoal.toLocaleString()}</span>
+              </div>
+              <div class="w-full bg-slate-100 rounded-full h-2"><div class="bg-indigo-600 h-2 rounded-full" style="width: ${percent}%"></div></div>
+            </div>
+            <button onclick="openDetailModal(${item.id})" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 rounded-xl transition">Kurucu Geçmişi & Detaylar</button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function renderInvestors() {
+      const grid = document.getElementById('investorsGrid');
+      grid.innerHTML = mockInvestors.map(inv => `
+        <div class="bg-white border border-slate-200 p-6 rounded-3xl shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 rounded-2xl bg-indigo-100 text-indigo-700 font-black flex items-center justify-center text-lg">${inv.name[0]}</div>
+                <div>
+                  <h4 class="font-extrabold text-slate-900 text-base">${inv.name}</h4>
+                  <span class="text-xs text-indigo-600 font-bold">${inv.type}</span>
+                </div>
+              </div>
+              <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-extrabold px-2.5 py-1 rounded-lg">${inv.exitCount} Exit Yapıldı</span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 bg-slate-50 p-3 rounded-2xl border border-slate-100 text-xs mb-4">
+              <div>
+                <span class="text-slate-400 block text-[10px]">Toplam Yatırdığı:</span>
+                <span class="font-black text-slate-800">$${inv.totalInvested.toLocaleString()}</span>
+              </div>
+              <div>
+                <span class="text-slate-400 block text-[10px]">Exit Getirisi:</span>
+                <span class="font-black text-emerald-600">$${inv.totalReturned.toLocaleString()}</span>
+              </div>
+            </div>
+
+            <div class="space-y-1 text-xs text-slate-600">
+              <div><span class="font-bold text-slate-800">Odak:</span> ${inv.focus}</div>
+              <div><span class="font-bold text-slate-800">Aktif Portföy:</span> ${inv.activeCount} Şirket</div>
+            </div>
+          </div>
+
+          <div class="flex gap-2">
+            <button onclick="openInvestorModal(${inv.id})" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs py-2.5 rounded-xl transition">Portföy & Exit Detayı</button>
+            <button onclick="alert('${inv.name} yatırımcısına sunum talebiniz iletildi.')" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs py-2.5 rounded-xl transition">Sunum Gönder</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openInvestorModal(id) {
+      const inv = mockInvestors.find(i => i.id === id);
+      if (!inv) return;
+
+      const content = document.getElementById('investorModalContent');
+      content.innerHTML = `
+        <div class="flex items-center space-x-3 mb-3">
+          <div class="w-12 h-12 rounded-2xl bg-indigo-100 text-indigo-700 font-black flex items-center justify-center text-lg">${inv.name[0]}</div>
+          <div>
+            <h3 class="text-2xl font-black text-slate-900">${inv.name}</h3>
+            <p class="text-xs text-indigo-600 font-bold">${inv.type} • Odak: ${inv.focus}</p>
+          </div>
+        </div>
+
+        <div class="bg-slate-900 text-white p-4 rounded-2xl grid grid-cols-2 gap-4 mb-6">
+          <div>
+            <div class="text-xs text-slate-400">Toplam Yatırdığı Sermaye</div>
+            <div class="text-xl font-black text-slate-200">$${inv.totalInvested.toLocaleString()} USD</div>
+          </div>
+          <div>
+            <div class="text-xs text-slate-400">Elde Ettiği Toplam Exit Getirisi</div>
+            <div class="text-xl font-black text-emerald-400">$${inv.totalReturned.toLocaleString()} USD</div>
+          </div>
+        </div>
+
+        <div class="mb-6">
+          <h4 class="font-black text-sm text-slate-900 mb-2">🎉 Tamamlanan Çıkışlar / Exit'ler (${inv.exits.length})</h4>
+          <div class="space-y-2">
+            ${inv.exits.map(e => `
+              <div class="bg-emerald-50/60 border border-emerald-200 p-3 rounded-xl flex justify-between items-center text-xs">
+                <div>
+                  <span class="font-extrabold text-slate-900">${e.name}</span>
+                  <span class="text-slate-500 block text-[11px]">${e.note} (${e.year})</span>
+                </div>
+                <div class="text-right">
+                  <span class="text-slate-400 block text-[10px]">Yatırım: $${e.invested.toLocaleString()}</span>
+                  <span class="font-black text-emerald-700">Getiri: $${e.returned.toLocaleString()}</span>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <div class="mb-6">
+          <h4 class="font-black text-sm text-slate-900 mb-2">⚡ Aktif Yatırım Yaptığı Şirketler (${inv.activePortfolio.length})</h4>
+          <div class="grid grid-cols-2 gap-2">
+            ${inv.activePortfolio.map(a => `
+              <div class="bg-slate-50 border p-3 rounded-xl text-xs">
+                <span class="font-bold text-slate-900 block">${a.name}</span>
+                <span class="text-slate-500 text-[11px]">${a.stage} • Yatırdığı: $${a.invested.toLocaleString()}</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <button onclick="alert('${inv.name} ile mesajlaşma başlatıldı.')" class="w-full bg-indigo-600 text-white font-bold text-xs py-3 rounded-xl">Yatırımcı İle İletişime Geç</button>
+      `;
+
+      toggleInvestorModal(true);
+    }
+
+    function openDetailModal(id) {
+      const item = startups.find(s => s.id === id);
+      if (!item) return;
+
+      const content = document.getElementById('detailModalContent');
+      content.innerHTML = `
+        <h2 class="text-2xl font-black text-slate-900 mb-1">${item.title}</h2>
+        <p class="text-xs text-indigo-600 font-bold mb-3">${item.university ? '🎓 ' + item.university : 'Bağımsız Girişim'}</p>
+        <p class="text-slate-600 text-sm mb-5 leading-relaxed">${item.description}</p>
+
+        <div class="bg-indigo-50/70 border border-indigo-200 p-4 rounded-2xl mb-5 space-y-3">
+          <div class="flex justify-between items-center">
+            <h4 class="font-black text-xs uppercase text-indigo-900">👤 Kurucu Kariyeri & Eski Girişimleri</h4>
+            <span class="text-[11px] font-bold text-indigo-700">${item.founder}</span>
+          </div>
+
+          ${item.founderPastStartups && item.founderPastStartups.length > 0 ? `
+            <div class="space-y-2">
+              <span class="text-[11px] font-bold text-slate-600 block">Önceki Şirketleri & Aldığı Yatırımlar:</span>
+              ${item.founderPastStartups.map(p => `
+                <div class="bg-white p-2.5 rounded-xl border border-indigo-100 text-xs flex justify-between items-center">
+                  <span class="font-bold text-slate-800">${p.name}</span>
+                  <span class="text-indigo-600 font-semibold text-[11px]">${p.status} (${p.raised})</span>
+                </div>
+              `).join('')}
+            </div>
+          ` : '<p class="text-xs text-slate-500">Bu kurucunun sistemde kayıtlı ilk ana girişimidir.</p>'}
+        </div>
+
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 mb-4 space-y-1 text-xs">
+          <div><span class="font-bold text-slate-800">Aranan Yatırım:</span> $${item.fundingGoal.toLocaleString()}</div>
+          <div><span class="font-bold text-slate-800">Şirket Değerlemesi:</span> $${(item.val || 500000).toLocaleString()}</div>
+        </div>
+
+        <button onclick="alert('Mesajınız iletildi.')" class="w-full bg-indigo-600 text-white font-bold text-xs py-3 rounded-xl">Kurucu İle Görüşme İste</button>
+      `;
+      toggleDetailModal(true);
+    }
+
+    function renderSyndicates() {
+      const grid = document.getElementById('syndicatesGrid');
+      grid.innerHTML = mockSyndicates.map(s => {
+        const pct = Math.round((s.raised / s.target) * 100);
+        return `
+          <div class="bg-white border border-slate-200 p-6 rounded-3xl shadow-sm space-y-4">
+            <div class="flex justify-between items-start">
+              <div>
+                <span class="bg-rose-50 text-rose-700 text-xs font-extrabold px-3 py-1 rounded-full">⏳ ${s.daysLeft} Gün Kaldı</span>
+                <h4 class="font-black text-slate-900 text-lg mt-2">${s.title}</h4>
+                <p class="text-xs text-indigo-600 font-bold">Lider Yatırımcı: ${s.leadInvestor}</p>
+              </div>
+              <span class="font-black text-emerald-600 text-sm">%${pct}</span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">${s.description}</p>
+            <button onclick="alert('Sendika katılım talebiniz iletildi.')" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs py-3 rounded-xl transition">Tura Katıl</button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderAcquisitions() {
+      const grid = document.getElementById('acquisitionsGrid');
+      grid.innerHTML = mockAcquisitions.map(a => `
+        <div class="bg-white border border-slate-200 p-6 rounded-3xl shadow-sm space-y-4 flex flex-col justify-between">
+          <div>
+            <span class="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full">🛒 Satılık Proje</span>
+            <h4 class="font-black text-slate-900 text-lg mt-2">${a.title}</h4>
+            <div class="bg-slate-50 p-3 rounded-2xl text-xs space-y-1 my-3">
+              <div><span class="font-bold text-slate-700">Aylık Ciro (MRR):</span> $${a.mrr}/ay</div>
+            </div>
+          </div>
+          <div>
+            <div class="text-lg font-black text-slate-900 mb-2">Satış Fiyatı: $${a.askingPrice.toLocaleString()}</div>
+            <button onclick="alert('İletişim talebiniz iletildi.')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-2.5 rounded-xl transition">Devir Al / İletişim</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function analyzeDeckWithAi() {
+      const text = document.getElementById('aiDeckText').value;
+      if(!text) { alert('Lütfen sunum özetinizi yazın.'); return; }
+      document.getElementById('aiResultBox').classList.remove('hidden');
+      document.getElementById('aiFeedbackList').innerHTML = `
+        <li>✅ Pazar büyüklüğü (TAM) tanımı net yapılmış.</li>
+        <li>✅ Gelir modeli (SaaS/Abonelik) belirgin.</li>
+        <li>⚠️ Rakip analizi tablosunu sunuma eklemeniz önerilir.</li>
+      `;
+    }
+
+    function toggleAddModal(show) { document.getElementById('addModal').classList.toggle('hidden', !show); }
+    function toggleDetailModal(show) { document.getElementById('detailModal').classList.toggle('hidden', !show); }
+    function toggleReviewModal(show) { document.getElementById('reviewModal').classList.toggle('hidden', !show); }
+    function toggleInvestorModal(show) { document.getElementById('investorDetailModal').classList.toggle('hidden', !show); }
+
+    function handleAddStartup(e) {
+      e.preventDefault();
+      const pastInput = document.getElementById('addPastStartups').value;
+      const pastStartups = pastInput ? [{ name: pastInput, status: "Kayıtlı Eski Deneyim", raised: "Belirtilmedi" }] : [];
+
+      const newStartup = {
+        id: Date.now(),
+        title: document.getElementById('addTitle').value,
+        sector: document.getElementById('addSector').value,
+        stage: document.getElementById('addStage').value,
+        fundingGoal: Number(document.getElementById('addGoal').value),
+        val: Number(document.getElementById('addGoal').value) * 5,
+        raised: 0,
+        founder: document.getElementById('addFounder').value,
+        founderBio: "Platform Üyesi Kurucu",
+        founderPastStartups: pastStartups,
+        description: document.getElementById('addDesc').value
+      };
+
+      startups.unshift(newStartup);
+      saveToStorage();
+      renderStartups(startups);
+      toggleAddModal(false);
+      alert('İlan eklendi!');
+    }
+
+    function handleReviewSubmit(e) {
+      e.preventDefault();
+      alert('Anonim değerlendirmeniz sisteme kaydedildi.');
+      toggleReviewModal(false);
+    }
+
+    function switchTab(tab) {
+      ['startups', 'syndicates', 'acquisitions', 'investors', 'studentPerks', 'aiTools'].forEach(t => {
+        const view = document.getElementById(`view-${t}`);
+        if(view) view.classList.add('hidden');
+        const btn = document.getElementById(`tabBtn-${t}`);
+        if(btn) btn.className = "px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition flex items-center gap-1";
+      });
+
+      document.getElementById(`view-${tab}`).classList.remove('hidden');
+      const activeBtn = document.getElementById(`tabBtn-${tab}`);
+      if(activeBtn) activeBtn.className = "px-3 py-2 rounded-xl text-xs font-bold text-indigo-600 bg-indigo-50/80 transition flex items-center gap-1";
+
+      if (tab === 'syndicates') renderSyndicates();
+      if (tab === 'acquisitions') renderAcquisitions();
+      if (tab === 'investors') renderInvestors();
+    }
+
+    function filterStartups() {
+      const search = document.getElementById('searchInput').value.toLowerCase();
+      const sector = document.getElementById('sectorFilter').value;
+      const stage = document.getElementById('stageFilter').value;
+
+      const filtered = startups.filter(s => {
+        const matchesSearch = s.title.toLowerCase().includes(search) || s.description.toLowerCase().includes(search) || s.founder.toLowerCase().includes(search);
+        const matchesSector = sector === "" || s.sector === sector;
+        const matchesStage = stage === "" || s.stage === stage;
+        return matchesSearch && matchesSector && matchesStage;
+      });
+
+      renderStartups(filtered);
+    }
+
+    function resetFilters() {
+      document.getElementById('searchInput').value = '';
+      document.getElementById('sectorFilter').value = '';
+      document.getElementById('stageFilter').value = '';
+      renderStartups(startups);
+    }
+    renderStartups(startups);
+
+    // Veritabanından girişim verilerini çekme
+   document.addEventListener("DOMContentLoaded", function () {
+      fetch('/api/startups')
+        .then(response => response.json())
+        .then(startupsData => {
+
+          // --- CANLI İSTATİSTİKLER (Toplanan Fon Gerçek Tutar Üzerinden Hesaplanır) ---
+          const startupCount = startupsData ? startupsData.length : 0;
+          const totalRaised = startupsData ? startupsData.reduce((sum, item) => sum + Number(item.raised || item.Raised || 0), 0) : 0;
+
+          if (document.getElementById("statStartupCount")) {
+            document.getElementById("statStartupCount").innerText = startupCount;
+          }
+          if (document.getElementById("statTotalFund")) {
+            document.getElementById("statTotalFund").innerText = "₺" + totalRaised.toLocaleString('tr-TR');
+          }
+          if (document.getElementById("statInvestorCount")) {
+            document.getElementById("statInvestorCount").innerText = "0";
+          }
+          // -------------------------------------------------------------------------
+
+          const container = document.getElementById("startupGrid");
+          if (!container) return;
+
+          container.innerHTML = "";
+
+          if (!startupsData || startupsData.length === 0) {
+            container.innerHTML = '<p class="col-span-full text-center text-slate-500 py-8">Veritabanında henüz girişim bulunmuyor.</p>';
+            return;
+          }
+
+          startupsData.forEach(item => {
+            const title = item.title || item.Title || 'Başlıksız';
+            const description = item.description || item.Description || '';
+            const sector = item.sector || item.Sector || 'Genel';
+            const stage = item.stage || item.Stage || 'Aşama Belirtilmedi';
+            const founder = item.founder || item.Founder || 'Belirtilmedi';
+            const university = item.university || item.University || '';
+
+            const fundingGoal = Number(item.fundingGoal || item.Goal || 500000);
+            const raised = Number(item.raised || item.Raised || 0);
+            const percentage = Math.min(100, Math.round((raised / (fundingGoal || 1)) * 100));
+
+            const card = `
+              <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-6 hover:shadow-md transition flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-3">
+                    <span class="px-3 py-1 bg-indigo-50 text-indigo-600 rounded-full text-xs font-semibold">${sector}</span>
+                    <span class="text-xs text-slate-400 font-medium">${stage}</span>
+                  </div>
+                  <h3 class="text-lg font-bold text-slate-800 mb-2">${title}</h3>
+                  <p class="text-slate-600 text-sm mb-4 leading-relaxed line-clamp-2">${description}</p>
+
+                  <div class="bg-slate-50 rounded-lg p-3 mb-4 border border-slate-100">
+                    <div class="flex justify-between text-xs font-medium text-slate-600 mb-1.5">
+                      <span>Toplanan: <strong class="text-indigo-600">₺${raised.toLocaleString('tr-TR')}</strong></span>
+                      <span>Hedef: <strong>₺${fundingGoal.toLocaleString('tr-TR')}</strong></span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-1.5 overflow-hidden">
+                      <div class="bg-indigo-600 h-1.5 rounded-full transition-all duration-300" style="width: ${percentage}%"></div>
+                    </div>
+                    <div class="text-right text-[10px] text-slate-400 mt-1 font-semibold">%${percentage} tamamlandı</div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="border-t border-slate-100 pt-3 mb-4 text-xs text-slate-500 flex justify-between items-center">
+                    <span><strong>Kurucu:</strong> ${founder}</span>
+                    <span class="text-indigo-600 font-medium">${university}</span>
+                  </div>
+
+                  <button onclick="toggleDetailModal(true)" class="w-full py-2.5 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg text-sm transition text-center block shadow-sm">
+                    İletişime Geç / Detaylar
+                  </button>
+                </div>
+              </div>
+            `;
+
+            container.innerHTML += card;
+          });
+        })
+        .catch(error => console.error("Veri çekme hatası:", error));
+    });
+    </script>
+</body>
+</html>
