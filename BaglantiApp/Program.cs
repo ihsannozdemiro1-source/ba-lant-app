@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Render/Docker Port Yapılandırması
 var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
 builder.WebHost.UseUrls($"http://*:{port}");
 
@@ -11,7 +10,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Connection String ve PostgreSQL Yapılandırması
 var connStr = builder.Configuration.GetConnectionString("DefaultConnection");
 string npgsqlConnStr = connStr ?? "";
 
@@ -35,18 +33,15 @@ if (!string.IsNullOrEmpty(npgsqlConnStr))
 
 var app = builder.Build();
 
-// Otomatik Veritabanı Tablosu Oluşturma
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetService();
     dbContext?.Database.EnsureCreated();
 }
 
-// Frontend ve Statik Dosya Desteği
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
-// Swagger Yapılandırması
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
@@ -58,15 +53,8 @@ app.UseAuthorization();
 app.MapControllers();
 app.Run();
 
-// Veritabanı Yapısı ve Modeller
 public class AppDbContext : DbContext
 {
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-
-    public DbSet<Kullanici> Kullanicilar => Set<Kullanici>();
-    public DbSet<Girisim> Girisimler => Set<Girisim>();
-    public DbSet<Teklif> Teklifler => Set<Teklif>();
-}
     public AppDbContext(DbContextOptions options) : base(options) { }
 
     public DbSet Kullanicilar => Set();
