@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Render/Docker Port Ayarý
+// Render/Docker Port Yapýlandýrmasý
 var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
 builder.WebHost.UseUrls($"http://*:{port}");
 
@@ -42,14 +42,17 @@ using (var scope = app.Services.CreateScope())
     dbContext?.Database.EnsureCreated();
 }
 
+// Frontend (wwwroot/index.html) ve Statik Dosya Desteði
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
+// Swagger Yapýlandýrmasý
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Girisim & Yatirim API v1");
     c.RoutePrefix = "swagger";
 });
-
-app.MapGet("/", () => "Girisim & Yatirim API ve PostgreSQL Veritabani Canli Ortamda Calisiyor!");
 
 app.UseAuthorization();
 app.MapControllers();
