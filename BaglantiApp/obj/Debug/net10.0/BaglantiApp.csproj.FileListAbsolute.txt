@@ -108,3 +108,4 @@ C:\Users\Lenovo\source\repos\BaglantiApp\BaglantiApp\obj\Debug\net10.0\refint\Ba
 C:\Users\Lenovo\source\repos\BaglantiApp\BaglantiApp\obj\Debug\net10.0\BaglantiApp.pdb
 C:\Users\Lenovo\source\repos\BaglantiApp\BaglantiApp\obj\Debug\net10.0\BaglantiApp.genruntimeconfig.cache
 C:\Users\Lenovo\source\repos\BaglantiApp\BaglantiApp\obj\Debug\net10.0\ref\BaglantiApp.dll
+C:\Users\Lenovo\source\repos\BaglantiApp\BaglantiApp\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt

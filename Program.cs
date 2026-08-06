@@ -1,11 +1,11 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 var builder = WebApplication.CreateBuilder(args);
+
 var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
 builder.WebHost.UseUrls($"http://*:{port}");
 
-builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -15,75 +15,178 @@ string npgsqlConnStr = connStr ?? "";
 if (!string.IsNullOrEmpty(connStr) && connStr.StartsWith("postgres"))
 {
     var uri = new Uri(connStr);
-    var userInfo = uri.UserInfo.Split(":");
+    var userInfo = uri.UserInfo.Split(':');
     var user = userInfo[0];
     var pass = userInfo.Length > 1 ? userInfo[1] : "";
     var host = uri.Host;
-    var portNum = uri.Port > 0 ? uri.Port : 5432;
-    var db = uri.AbsolutePath.TrimStart("/");
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   var portNum = uri.Port > 0 ? uri.Port : 5432;
+    var db = uri.AbsolutePath.TrimStart('/');
     npgsqlConnStr = $"Host={host};Port={portNum};Database={db};Username={user};Password={pass};Ssl Mode=Require;Trust Server Certificate=true";
 }
 
 if (!string.IsNullOrEmpty(npgsqlConnStr))
 {
-    builder.Services.AddDbContext(options =>
+    builder.Services.AddDbContext<AppDbContext>(options =>
         options.UseNpgsql(npgsqlConnStr));
 }
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
+using (var scope = app.Services.CreateSc
+
+
+
+
+
+
+
+
+
+
+
+
+ope())
 {
-    var dbContext = scope.ServiceProvider.GetService();
+    var dbContext = scope.ServiceProvider.GetService<AppDbContext>();
     dbContext?.Database.EnsureCreated();
 }
 
-app.UseDefaultFiles();
-app.UseStaticFiles();
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Girisim & Yatirim API v1");
-    c.RoutePrefix = "swagger";
+    c.Route
+
+
+
+
+
+
+
+
+
+Prefix = string.Empty;
 });
 
-app.UseAuthorization();
-app.MapControllers();
+app.MapGet("/api/kullanicilar", async (AppDbContext db) => await db.Kullanicilar.ToListAsync());
+app.MapPost("/api/kullanicilar", async (AppDbContext db, Kullanici k) => {
+    db.Kullanicilar.Add(k);
+ 
+
+
+
+
+
+   await db.SaveChangesAsync();
+    return Results.Created($"/api/kullanicilar/{k.Id}", k);
+});
+
+app.MapGet("/api/girisimler", async (AppDbContext db) => await db.Girisimler.ToListAsync());
+a
+
+
+
+
+pp.MapPost("/api/girisimler", async (AppDbContext db, Girisim g) => {
+    db.Girisimler.Add(g);
+    await db.SaveChangesAsync();
+    return Results.Created($"/api/girisimler/{g.Id}", g);
+}
+
+
+
+);
+
 app.Run();
 
-public class AppDbContext : DbContext
+p
+
+
+
+ublic class AppDbContext : DbContext
 {
-    public AppDbContext(DbContextOptions options) : base(options) { }
-    public DbSet Kullanicilar => Set();
-    public DbSet Girisimler => Set();
-    public DbSet Teklifler => Set();
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+
+ 
+
+
+
+   public DbSet<Kullanici> Kullanicilar => Set<Kullanici>();
+    public DbSet<Girisim> Girisimler => Set<Girisim>();
+    public DbSet<Teklif> Teklifler => Set<Teklif>();
 }
+
+
+
 
 public class Kullanici
 {
+
+
+
     public int Id { get; set; }
     [Required] public string AdSoyad { get; set; } = string.Empty;
-    [Required] public string Email { get; set; } = string.Empty;
+ 
+
+
+   [Required] public string Email { get; set; } = string.Empty;
     public string Rol { get; set; } = "Girisimci";
 }
 
+
+
 public class Girisim
 {
+
+
+
     public int Id { get; set; }
-    [Required] public string Baslik { get; set; } = string.Empty;
+    [Required] public string Baslik { get
+
+; set; } = string.Empty;
     public string Aciklama { get; set; } = string.Empty;
-    public string Sektor { get; set; } = string.Empty;
+   
+
+ public string Sektor { get; set; } = string.Empty;
     public decimal ArananYatirim { get; set; }
     public decimal TeklifEdilenHisseYuzdesi { get; set; }
-    public int KullaniciId { get; set; }
+ 
+
+
+   public int KullaniciId { get; set; }
 }
 
-public class Teklif
+p
+
+
+ublic class Teklif
 {
-    public int Id { get; set; }
+    
+
+public int Id { get; set; }
     public int GirisimId { get; set; }
-    public int YatirimciId { get; set; }
+ 
+
+   public int YatirimciId { get; set; }
     public decimal TeklifMiktari { get; set; }
-    public string Mesaj { get; set; } = string.Empty;
+ 
+
+   public string Mesaj { get; set; } = string.Empty;
     public DateTime Tarih { get; set; } = DateTime.UtcNow;
 }
+
