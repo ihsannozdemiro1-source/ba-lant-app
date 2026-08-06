@@ -22,6 +22,10 @@ var app = builder.Build();
 
 {
     app.UseSwagger();
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "BaglantiApp API v1");
+    c.RoutePrefix = string.Empty; // Swagger'ı doğrudan ana sayfaya (https://baglanti-app.onrender.com/) bağlar
+});s
     app.UseSwaggerUI();
 }
 
