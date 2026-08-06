@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Render/Docker Port Yapýlandýrmasý
+// Render/Docker Port YapÄ±landÄ±rmasÄ±
 var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
 builder.WebHost.UseUrls($"http://*:{port}");
 
@@ -11,7 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Connection String ve PostgreSQL Yapýlandýrmasý
+// Connection String ve PostgreSQL YapÄ±landÄ±rmasÄ±
 var connStr = builder.Configuration.GetConnectionString("DefaultConnection");
 string npgsqlConnStr = connStr ?? "";
 
@@ -35,18 +35,18 @@ if (!string.IsNullOrEmpty(npgsqlConnStr))
 
 var app = builder.Build();
 
-// Otomatik Veritabaný Tablosu Oluþturma
+// Otomatik VeritabanÄ± Tablosu OluÅŸturma
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetService();
     dbContext?.Database.EnsureCreated();
 }
 
-// Frontend ve Statik Dosya Desteði
+// Frontend ve Statik Dosya DesteÄŸi
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
-// Swagger Yapýlandýrmasý
+// Swagger YapÄ±landÄ±rmasÄ±
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
@@ -58,9 +58,15 @@ app.UseAuthorization();
 app.MapControllers();
 app.Run();
 
-// Veritabaný Yapýsý ve Modeller
+// VeritabanÄ± YapÄ±sÄ± ve Modeller
 public class AppDbContext : DbContext
 {
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+
+    public DbSet<Kullanici> Kullanicilar => Set<Kullanici>();
+    public DbSet<Girisim> Girisimler => Set<Girisim>();
+    public DbSet<Teklif> Teklifler => Set<Teklif>();
+}
     public AppDbContext(DbContextOptions options) : base(options) { }
 
     public DbSet Kullanicilar => Set();
