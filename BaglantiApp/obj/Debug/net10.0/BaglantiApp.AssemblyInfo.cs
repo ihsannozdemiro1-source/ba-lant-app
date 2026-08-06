@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BaglantiApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+348416b22417389dab47840eab16ecf2dc32d409")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+31dfb17c0a71660e9b0509c8536d583dc2ca89c8")]
 [assembly: System.Reflection.AssemblyProductAttribute("BaglantiApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BaglantiApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
