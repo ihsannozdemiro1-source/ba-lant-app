@@ -1,8 +1,10 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY . .
+COPY ["BaglantiApp/BaglantiApp.csproj", "BaglantiApp/"]
 RUN dotnet restore "BaglantiApp/BaglantiApp.csproj"
-RUN dotnet publish "BaglantiApp/BaglantiApp.csproj" -c Release -o /app/out
+COPY . .
+WORKDIR "/src/BaglantiApp"
+RUN dotnet publish "BaglantiApp.csproj" -c Release -o /app/out
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
