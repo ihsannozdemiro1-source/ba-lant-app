@@ -57,9 +57,9 @@ public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions options) : base(options) { }
 
-    public DbSet Kullanicilar => Set();
-    public DbSet Girisimler => Set();
-    public DbSet Teklifler => Set();
+    public DbSet<Kullanici> Kullanicilar => Set<Kullanici>();
+    public DbSet<Girisim> Girisimler => Set<Girisim>();
+    public DbSet<Teklif> Teklifler => Set<Teklif>();
 }
 
 public class Kullanici
