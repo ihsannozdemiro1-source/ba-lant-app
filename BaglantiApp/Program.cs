@@ -7,7 +7,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Connection String ve PostgreSQL Yapýlandýrmasý
+// Connection String Yapýlandýrmasý
 var connStr = builder.Configuration.GetConnectionString("DefaultConnection");
 string npgsqlConnStr = connStr ?? "";
 
@@ -25,7 +25,7 @@ if (!string.IsNullOrEmpty(connStr) && connStr.StartsWith("postgres"))
 
 if (!string.IsNullOrEmpty(npgsqlConnStr))
 {
-    builder.Services.AddDbContext(options =>
+    builder.Services.AddDbContext<AppDbContext>(options =>
         options.UseNpgsql(npgsqlConnStr));
 }
 
@@ -34,7 +34,7 @@ var app = builder.Build();
 // Otomatik Veritabaný Tablosu Oluþturma
 using (var scope = app.Services.CreateScope())
 {
-    var dbContext = scope.ServiceProvider.GetService();
+    var dbContext = scope.ServiceProvider.GetService<AppDbContext>();
     dbContext?.Database.EnsureCreated();
 }
 
@@ -54,11 +54,11 @@ app.Run();
 // Veritabaný Yapýsý ve Modeller
 public class AppDbContext : DbContext
 {
-    public AppDbContext(DbContextOptions options) : base(options) { }
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-    public DbSet Kullanicilar => Set();
-    public DbSet Girisimler => Set();
-    public DbSet Teklifler => Set();
+    public DbSet<Kullanici> Kullanicilar => Set<Kullanici>();
+    public DbSet<Girisim> Girisimler => Set<Girisim>();
+    public DbSet<Teklif> Teklifler => Set<Teklif>();
 }
 
 public class Kullanici
@@ -88,3 +88,4 @@ public class Teklif
     public decimal TeklifMiktari { get; set; }
     public string Mesaj { get; set; } = string.Empty;
     public DateTime Tarih { get; set; } = DateTime.UtcNow;
+}
